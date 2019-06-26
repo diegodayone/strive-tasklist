@@ -1,4 +1,92 @@
 <html>
-    <head></head>
-    <body></body>
+    <head>
+        <title>Strive - Task List</title>
+        <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
+        <style>
+            body{
+                background: #181818;
+                color: white;
+                font-family: 'Nunito';
+            }
+
+            #container{
+                width: 600px;
+                margin: 0 auto;
+            }
+
+            h1{
+                text-align: center;
+            }
+
+            #addTask {
+                display: flex;
+            }
+
+            #task{
+                flex-grow: 1;
+                text-align: center;
+            }
+
+
+            #addButton{
+                background-color: #ef3d59;
+                color:white;
+                width: 100px;
+                border: 1px solid white;
+            }
+
+            input{
+                height: 50px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="container">
+            <h1>Strive Task List</h1>
+            <div id="addTask">
+                <input type="text" placeholder="Task" id="task" />
+                <input type="button" value="Add" id="addButton" onclick="addTask()" />
+            </div>
+
+            <div id="list">
+
+            </div>
+
+        </div>
+
+        <script>
+            window.onload = function(){
+                console.log("Page has loaded");
+            }
+
+            function addTask(){
+                console.log("The button has been pressed");
+
+                var myDiv  = document.createElement("div");
+                myDiv.classList.add("listItem");
+                //DIV
+
+                var text = document.createElement("span");
+                text.innerText = document.getElementById("task").value;
+                myDiv.appendChild(text);
+                //SPAN => DIV
+
+                var deleteButton = document.createElement("button");
+                deleteButton.innerText = "X";
+                myDiv.appendChild(deleteButton);
+                //BUTTON => DIV
+
+                /*
+                    <div>
+                        <span> Go to the grocery</span>
+                        <button> X </button>
+                    </div>
+                */
+
+                var list = document.getElementById("list");
+                list.appendChild(myDiv);
+                //list.appendChild(text);
+            }
+        </script>
+    </body>
 </html>
