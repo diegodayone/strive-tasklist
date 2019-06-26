@@ -38,6 +38,30 @@
             input{
                 height: 50px;
             }
+
+            .listItem{
+                flex-grow: 1;
+                background-color: #ef3d59;
+                color: white;
+                padding: 10px;
+                margin: 10px;
+                display: flex;
+                border-radius: 5px;
+            }
+
+            .listItem span{
+                flex-grow: 1;
+                line-height: 50px;
+                text-align:center;
+            }
+
+            .listItem button{
+                height: 50px;
+                width: 50px;
+                background-color: white;
+                color:#ef3d59;
+                border: 1px solid  #ef3d59;
+            }
         </style>
     </head>
     <body>
@@ -63,7 +87,7 @@
                 console.log("The button has been pressed");
 
                 var myDiv  = document.createElement("div");
-                myDiv.classList.add("listItem");
+                myDiv.classList.add("listItem"); //<= adding class to the Item
                 //DIV
 
                 var text = document.createElement("span");
@@ -73,19 +97,43 @@
 
                 var deleteButton = document.createElement("button");
                 deleteButton.innerText = "X";
+                deleteButton.addEventListener("click", deleteItem)
                 myDiv.appendChild(deleteButton);
                 //BUTTON => DIV
 
-                /*
-                    <div>
-                        <span> Go to the grocery</span>
-                        <button> X </button>
-                    </div>
-                */
+                var moveUpButton = document.createElement("button");
+                moveUpButton.innerText = "+";
+                moveUpButton.addEventListener("click", moveUp);
+                myDiv.appendChild(moveUpButton);
+
+                var moveDownButton = document.createElement("button");
+                moveDownButton.innerHTML = "-";
+                moveDownButton.addEventListener("click", moveDown);
+                myDiv.appendChild(moveDownButton);
 
                 var list = document.getElementById("list");
                 list.appendChild(myDiv);
                 //list.appendChild(text);
+            }
+
+            function deleteItem(event){
+                var button = event.target;
+                var listItem = event.target.parentElement;
+
+                event.target.parentElement.remove(event.target.parentElement);
+            }
+
+            function moveUp(event){
+                var div = event.target.parentElement; //DIV 
+                var list = document.getElementById("list"); //LIST 
+
+                list.insertBefore(div, div.previousSibling); //HEY LIST! Move this Line BEFORE the previous element
+            }
+
+            function moveDown(event){
+                var div = event.target.parentElement;
+                var list = document.getElementById("list");
+                list.insertBefore(div.nextSibling, div);                
             }
         </script>
     </body>
